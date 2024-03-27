@@ -1,11 +1,13 @@
 (ns drews.national-institutes-of-health.principle-investigator.appointment_type
-  (:require [clojure.spec.alpha :as s]))
+  (:require [clojure.spec.alpha :as s]
+            [drews.national-institutes-of-health.other-support.project.person-months :as pm]
+            ))
 
-(s/def ::primary-duration (s/and pos-int? #(<= 1 % 12)))
-(s/def ::secondary-duration (s/and pos-int? #(<= 1 % 3)))
+#_(s/def ::primary-duration (s/and pos-int? #(<= 1 % 12)))
+#_(s/def ::secondary-duration (s/and pos-int? #(<= 1 % 3)))
 
-(s/def ::durations (s/keys :req [::primary-duration]
-                           :opt [::secondary-duration]))
+(s/def ::durations (s/keys :req [::pm/primary-duration]
+                           :opt [::pm/secondary-duration]))
 
 (defn duration-in-months->display-names
   [duration-in-months]
